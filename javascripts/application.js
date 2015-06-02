@@ -8,7 +8,10 @@ $(function() {
             ken:$("input[name='ken']").val(),
             siku:$("input[name='siku']").val(),
             tyou:$("input[name='tyou']").val(),
-            date:new Date($("input[name='date']").val())
+            date:new Date($("input[name='date']").val()),
+            old:function() {
+                return parseInt((formatOld(new Date) - formatOld(this.date)) / 10000);
+            }
         };
         array.push(data);
         addRow(data, count);
@@ -31,12 +34,21 @@ $(function() {
 // 行を追加する
 var addRow = function(data, count) {
     $('#addressTable').append("<tr id="+count+"><td>" + data.name + "</td><td>" + data.ken + data.siku + data.tyou +
-    "</td><td>" + formatDate(data.date) + "</td></tr>");
+    "</td><td>" + formatDate(data.date) + "</td><td>" + data.old() + "</td></tr>");
 }
 
 // Date型をフォーマット
 var formatDate = function toLocaleString(date){
     return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join( '/' ) + ' '
+}
+
+// 年齢計算用のフォーマット
+var formatOld = function toLocaleString(date){
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {month = '0' + month;};
+    if (day < 10) {day = '0' + day;};
+    return date.getFullYear() + month + day;
 }
 
 // selectのoptionに存在しない場合は追加
