@@ -20,6 +20,11 @@ $(function() {
     $('#sortSelect').change(function() {
         hideRow(array);
     });
+
+    // 誕生日ソートを変更したとき
+    $('#sortDate').change(function() {
+        sortDate(array);
+    });
 });
 
 
@@ -56,5 +61,32 @@ var hideRow = function(array) {
             else                          $("#addressTable #"+i).show();
         };
     }
+}
+
+// 誕生日でソートする
+var sortDate = function(array) {
+    var selected = $("#sortDate option:selected").text();
+    if (selected == "昇順") {
+        array.sort(function(a,b){
+            return a.date - b.date;
+        });
+        rewriteTable(array);
+    } else if (selected == "降順") {
+        array.sort(function(a,b){
+            return b.date - a.date;
+        });
+        rewriteTable(array);
+    };
+}
+
+// 表を書き換える
+var rewriteTable = function(array) {
+    for (var i=0; i < array.length; i++) {
+        $("#addressTable #"+i).remove();
+    };
+    for (var i=0; i < array.length; i++) {
+        addRow(array[i], i);
+    };
+    hideRow(array);
 }
 
