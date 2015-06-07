@@ -11,7 +11,7 @@
 実行例  
 
 ```JavaScript
-    % open Address.html
+% open Address.html
 ```
 
 
