@@ -33,8 +33,11 @@ $(function() {
 
 // 行を追加する
 var addRow = function(data, count) {
+    // $('#addressTable').fadeOut(0);
     $('#addressTable').append("<tr id="+count+"><td>" + data.name + "</td><td>" + data.ken + data.siku + data.tyou +
     "</td><td>" + formatDate(data.date) + "</td><td>" + data.old() + "</td></tr>");
+    $('#'+count).hide();
+    $('#'+count).fadeIn("slow");
 }
 
 // Date型をフォーマット
@@ -64,13 +67,13 @@ var hideRow = function(array) {
     if (selected == "全て") {
         // 全てのときは、表を全て表示
         for (var i=0; i < array.length; i++) {
-            $("#addressTable #"+i).show();
+            $("#addressTable #"+i).fadeIn("slow");
         };
     } else {
         // 一致する行のみ表示
         for (var i=0; i < array.length; i++) {
             if (array[i].ken != selected) $("#addressTable #"+i).hide();
-            else                          $("#addressTable #"+i).show();
+            else                          $("#addressTable #"+i).fadeIn("slow");
         };
     }
 }
