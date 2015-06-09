@@ -10,7 +10,7 @@
 ### 使い方
 実行例  
 
-```JavaScript
+```
 % open Address.html
 ```
 
